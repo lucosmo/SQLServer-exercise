@@ -1,3 +1,4 @@
+USE AdventureWorks2019;
 -- assign a unique row number to each employee ordered by LoginID
 
 SELECT E1.BusinessEntityID, 
