@@ -107,3 +107,80 @@ DROP CONSTRAINTS
 ALTER TABLE Orders
 DROP CONSTRAINT FK_PersonOrder
 
+USING SELECT
+
+SELECT * FROM Person
+
+SELECT TOP(10) FROM Person
+
+SELECT TOP(100) PERCENT FROM Person
+
+SELECT ID, DOB FROM Person
+
+FILTERING
+
+SELECT * FROM Person
+WHERE ID > 10
+
+SELECT * FROM Person
+ORDER BY DOB ASC
+
+SELECT * FROM Person
+ORDER BY DOB DESC
+
+WILD CARDS
+
+SELECT * FROM Person
+WHERE LastName LIKE 'Smit%'
+
+JOINS
+
+SELECT * FROM Person
+INNER JOIN JobTitles ON Person.JobTitleID = JobTitles.JobTitleID
+
+UNION
+
+SELECT FirstName FROM Person
+UNION
+SELECT FirstName FROM Customer
+
+SELECT FirstName FROM Person
+UNION ALL
+SELECT FirstName FROM Customer
+
+DISTINCT
+
+SELECT distinct FirstName FROM Person
+INNER JOIN Customer ON Person.ID = Customer.ID
+
+GROUP BY
+
+SELECT p.FirstName, Count(p.FirstName) FROM Person p
+INNER JOIN JobTitles jt ON p.JobTitleID = jt.JobTitleID
+WHERE jt.Title = 'Manager'
+GROUP BY p.FirstName
+ORDER BY p.FirstName
+
+HAVING
+
+SELECT p.FirstName, Count(p.FirstName) FROM Person p
+INNER JOIN JobTitles jt ON p.JobTitleID = jt.JobTitleID
+WHERE jt.Title = 'Manager'
+GROUP BY p.FirstName
+HAVING Count(p.FirstName)>2
+ORDER BY p.FirstName
+
+AGGREGATE
+
+Count()
+Sum()
+AVG()
+Min()
+Max()
+
+STRING MANIPULATION
+
+SELECT 
+    p.FirstName + ' ' + p.LastName [FULL NAME],
+    FORMAT(COUNT(s.TotalValue), 'C') [TOTAL SALES],
+    CONCAT(p.FirstName,' ', p.LastName) [FULL CONCAT NAME]
