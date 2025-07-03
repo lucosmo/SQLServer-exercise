@@ -184,3 +184,16 @@ SELECT
     p.FirstName + ' ' + p.LastName [FULL NAME],
     FORMAT(COUNT(s.TotalValue), 'C') [TOTAL SALES],
     CONCAT(p.FirstName,' ', p.LastName) [FULL CONCAT NAME]
+
+CTE (COMMON TABLE EXPRESSION)
+
+--NON-RECURSIVE
+WITH TopSalariedEmployees AS (
+    SELECT FirstName, LastName, Salary
+    FROM Employees
+    WHERE Salary > 10000
+)
+SELECT FirstName, LastName
+FROM TopSalariedEmployees
+
+--RECURSIVE
