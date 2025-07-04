@@ -196,4 +196,42 @@ WITH TopSalariedEmployees AS (
 SELECT FirstName, LastName
 FROM TopSalariedEmployees
 
---RECURSIVE
+WINDOW FUNCTIONS
+--Aggregate WF
+SUM(), MAX(), COUNT()
+--Ranking WF
+RANK(), DENSE_RANK(), ROW_NUMBER()
+--Valuie WF
+LAG(), LEAD(), FIRST_VALUE()
+
+Window_Function ([ALL] expression)
+OVER ([PARTITION BY partition_list] [ ORDER BY order_list])
+
+--Aggregate
+SELECT OrderID,
+	MAX(UnitPrice) OVER() AS MaxUnitPrice,
+	MIN(UnitPrice) OVER() AS MinUnitPrice
+FROM Sales.OrderDetail
+
+SELECT OrderID,
+	MAX(UnitPrice) OVER(PARTITION BY OrderID) AS UnitPrice
+FROM Sales.OrderDetail
+
+SELECT OrderID,
+	SUM(UnitPrice) OVER(PARTITION BY OrderID)
+FROM Sales.OrderDetail
+
+--Ranking
+SELECT OrderID,
+	ROW_NUMBER() OVER () AS [RowCount]
+FROM Sales.OrderDetail
+
+ISNULL
+
+ISNULL(expression, value)
+IF EXPRESSION IS NULL, USES VALUE
+
+COALESCE (ANSI)
+
+COALESCE(expression1, expression2, ...) 
+RETURNS 1ST NON-NULL EXPRESSION
